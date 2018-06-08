@@ -22,9 +22,15 @@ def readVolts():
 	volts = s*(3.3/1024)*3.05
 	return volts
 
-def shutdownVolts(cutoff):
+def lowVoltage(cutoff):
 	v = readVolts()
-	if (GPIO.input(switch) == False or v < cutoff):
+	if v < cutoff:
+		return True
+	else:
+		return False
+
+def turnOff():
+	if GPIO.input(switch) == False:
 		return True
 	else:
 		return False
